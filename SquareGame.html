@@ -40,8 +40,7 @@
     let base_y = Math.floor(Math.random() * 250)
 
     //every moment this will happen
-    function step()
-    {
+    function step() {
       // all painting logic and
       // telling browser to run very 60th of a second
       //clear path
@@ -54,8 +53,7 @@
       ctx.strokeRect(base_x, base_y, 50, 50);
 
 
-      if (player_x >= base_x && player_y >= base_y && player_x <= base_x + 50 && player_y <= base_y + 50)
-      {
+      if (player_x >= base_x && player_y >= base_y && player_x <= base_x + 50 && player_y <= base_y + 50) {
         base_x = Math.floor(Math.random() * 250)
         base_y = Math.floor(Math.random() * 250)
 
@@ -67,23 +65,19 @@
 
     requestAnimationFrame(step);
 
-  //event handler every time a key press happens
-  // this function looks at the keys pressed and moves up,
-  // down, side to side 5 pixels
+    //event handler every time a key press happens
+    // this function looks at the keys pressed and moves up,
+    // down, side to side 5 pixels
 
-    function handleInput(event)
-    {
+    function handleInput(event) {
       const key = event.key;
-      if (key === 'a'){
+      if (key === 'a') {
         player_x -= 5;
-      }
-      else if(key === 'w'){
+      } else if (key === 'w') {
         player_y -= 5;
-      }
-      else if (key === 'd'){
+      } else if (key === 'd') {
         player_x += 5;
-      }
-      else if (key === 's'){
+      } else if (key === 's') {
         player_y += 5;
       }
     }
