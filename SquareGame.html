@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Square Game</title>
+</head>
+
+<body>
+  <h1>Metal Gear Square: Mario</h1>
+  <main>
+    <canvas></canvas>
+  </main>
+  <!-- <section>Score: <span>0</span></section> -->
+
+
+  <script>
+    //grabs a reference to canvas element
+    const canvas = document.querySelector('canvas');
+
+    //setting some properties to get a proper square dimension
+    //canvas needs to actually be these dimensions
+    //css makes it look a certain way, we need the canvas to actually
+    // be those dimensions
+    canvas.width = 300
+    canvas.height = 300
+
+    // creating a context with a method
+    // that is special to the canvas element
+    // called getContext()
+
+    // this rendering context allows me to paint pixels
+    // inside of the element
+    const ctx = canvas.getContext('2d')
+
+    // declaring X Y coordinate variables here for player and base
+    let player_x = 20;
+    let player_y = 20;
+    let base_x = Math.floor(Math.random() * 250)
+    let base_y = Math.floor(Math.random() * 250)
+
+    //every moment this will happen
+    function step()
+    {
+      // all painting logic and
+      // telling browser to run very 60th of a second
+      //clear path
+      ctx.clearRect(0, 0, 300, 300);
+      // using these methods to pain inside the canvas element
+      ctx.fillStyle = 'pink';
+
+      // the pixel player
+      ctx.fillRect(player_x, player_y, 10, 10);
+      ctx.strokeRect(base_x, base_y, 50, 50);
+
+
+      if (player_x >= base_x && player_y >= base_y && player_x <= base_x + 50 && player_y <= base_y + 50)
+      {
+        base_x = Math.floor(Math.random() * 250)
+        base_y = Math.floor(Math.random() * 250)
+
+      }
+
+      // recursion, this runs code every 60th os second
+      requestAnimationFrame(step);
+    }
+
+    requestAnimationFrame(step);
+
+  //event handler every time a key press happens
+  // this function looks at the keys pressed and moves up,
+  // down, side to side 5 pixels
+
+    function handleInput(event)
+    {
+      const key = event.key;
+      if (key === 'a'){
+        player_x -= 5;
+      }
+      else if(key === 'w'){
+        player_y -= 5;
+      }
+      else if (key === 'd'){
+        player_x += 5;
+      }
+      else if (key === 's'){
+        player_y += 5;
+      }
+    }
+    // document keeps an ear out for any key presses,
+    // and if you do, run that function and pass in an event
+    document.addEventListener('keypress', handleInput)
+  </script>
+
+  <style>
+    canvas {
+      border: 1px solid black;
+      background-color: lavender;
+    }
+  </style>
+</body>
+
+</html>
